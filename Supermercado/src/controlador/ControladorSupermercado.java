@@ -57,7 +57,12 @@ man.dispose();
         boolean resultado = DaoSupermercado.alterar(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-        } else {
+        } else 
+        if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();
+        {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
     }
@@ -69,7 +74,12 @@ man.dispose();
         boolean resultado = DaoSupermercado.excluir(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
-        } else {
+        } else 
+        if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();
+        {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
     }
