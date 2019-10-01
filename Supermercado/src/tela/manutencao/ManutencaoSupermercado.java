@@ -4,21 +4,38 @@
  * and open the template in the editor.
  */
 package tela.manutencao;
-
+import tela.listagem.ListagemSupermercado;
 /**
  *
  * @author Administrador
  */
 public class ManutencaoSupermercado extends javax.swing.JDialog {
-
+public ListagemSupermercado listagem;
     /**
      * Creates new form ManutencaoSupermercado
      */
     public ManutencaoSupermercado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
-
+ public ManutencaoSupermercado(java.awt.Frame parent, boolean modal, ListagemSupermercado listagem) {
+        super(parent, modal);
+        initComponents();
+        this.listagem = listagem;
+        
+        jtfcodigo.setEnabled(false);  //desabilitando a edição do campo código
+        btnAlterar.setEnabled(false); //desabilitando o botão alterar
+        btnExcluir.setEnabled(false); //desabilitando o botão excluir
+  }
+   public ManutencaoSupermercado(java.awt.Frame parent, boolean modal, ListagemSupermercado listagem, int pk) {
+        super(parent, modal);
+        initComponents();
+        
+        jtfcodigo.setEnabled(false);  //desabilitando a edição do campo código
+        this.listagem = listagem;
+        controlador.ControladorSupermercado.atualizaCampos(this, pk);//pegando os valores do BD e colocando na tela
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

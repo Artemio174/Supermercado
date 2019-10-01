@@ -105,5 +105,29 @@ public class DaoSupermercado {
             System.out.println(ex.getMessage());
             return null;
         }
-}  
+}
+        public static Supermercado consultar(int primaryKey) {
+        //editar o SQL conforme a entidade
+        String sql = "SELECT  nome_fantasia, razao_social, fundacao, nr_funcionarios, valor_bolsa FROM supermercado WHERE codigo=?";
+        PreparedStatement ps;
+        try {
+            ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setInt(1, primaryKey);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Supermercado objeto = new Supermercado();
+                //definir um set para cada atributo da entidade, cuidado com o tipo
+                objeto.setCodigo(rs.getInt("codigo"));
+                objeto.setNome_fantasia(rs.getString("nome_fantasia"));
+                objeto.setRazao_social(rs.getString("razao_social"));
+                objeto.setFundacao(rs.getDate("fundacao").toLocalDate());
+                objeto.setNr_funcionarios(rs.getInt("nr_funcionarios"));
+                objeto.setValor_bolsa(rs.getDouble("valor_bolsa"));
+                return objeto;//não mexa nesse, ele adiciona o objeto na lista
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
 }

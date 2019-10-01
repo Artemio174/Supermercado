@@ -34,7 +34,12 @@ public class ControladorSupermercado {
         boolean resultado = DaoSupermercado.inserir(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
-        } else {
+        } else 
+        if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();
+        {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
 }
@@ -92,5 +97,17 @@ public class ControladorSupermercado {
         }
         tabela.setModel(modelo);
     }
-    
+    public static void atualizaCampos(ManutencaoSupermercado man, int pk){ 
+        Supermercado objeto = DaoSupermercado.consultar(pk);
+        //Definindo os valores do campo na tela (um para cada atributo/campo)
+        man.jtfcodigo.setText(objeto.getCodigo().toString());
+        man.jtfnome_fantasia.setText(objeto.getNome_fantasia());
+        man.jtfrazao_social.setText(objeto.getRazao_social());
+        man.jtffundacao.setText(objeto.getFundacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        man.jtfnr_funcionarios.setText(objeto.getNr_funcionarios().toString());
+        man.jtfvalor_bolsa.setText(objeto.getValor_bolsa().toString());
+        
+        man.jtfcodigo.setEnabled(false); //desabilitando o campo código
+        man.btnAdicionar.setEnabled(false); //desabilitando o botão adicionar
+    }
 }
